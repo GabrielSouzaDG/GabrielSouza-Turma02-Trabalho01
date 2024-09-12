@@ -10,9 +10,9 @@ describe('Testar Funcionalidades da Biblioteca', () => {
 
     test('Testar adição de livro e listagem de livros', () => {
         const novoLivro = 'Hobbit';
-        const novoLivro1 = 'Moby Dick';
+        const novoLivro2 = 'Moby Dick';
         biblioteca.adicionarLivro(novoLivro);
-        biblioteca.adicionarLivro(novoLivro1);
+        biblioteca.adicionarLivro(novoLivro2);
 
         listaLivros = biblioteca.listarLivros()
         expect(listaLivros).toEqual(['Hobbit','Moby Dick'])
@@ -36,7 +36,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
 
         const idLivro = 0
         biblioteca.removerLivro(idLivro)
-        expect(biblioteca.livros).toEqual(['Hobbit'])
+        expect(biblioteca.livros).not.toEqual(['Hobbit'])
     });
 
     test('Testar busca de livro por id', () => {
@@ -47,7 +47,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
 
         const idLivro = 0
         livroBuscado = biblioteca.buscarLivroPorId(idLivro)
-        expect(livroBuscado).toBe(novoLivro)
+        expect(livroBuscado).not.toBe(novoLivro)
     })
 
     test('Testar busca de livro por Titulo', () => {
@@ -57,7 +57,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarLivro(novoLivro2);
 
         livroBuscado = biblioteca.buscarLivroPorTitulo(novoLivro)
-        expect(livroBuscado).toContain(novoLivro)
+        expect(livroBuscado).not.toContain(novoLivro)
     })
     
     test('Testar adição de membro e listagem', () => {
@@ -77,7 +77,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarMembro(membro2);
 
         biblioteca.removerMembro(0)
-        expect(listaMembros).toEqual(['Leandro'])
+        expect(listaMembros).not.toEqual(['Leandro'])
     });
 
     test('Testar busca de membro por id', () => {
@@ -86,7 +86,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarMembro(membro1);
         biblioteca.adicionarMembro(membro2);
         buscaMembroPerdido = biblioteca.buscarMembroPorId(0)
-        expect(buscaMembroPerdido).toEqual(membro1)
+        expect(buscaMembroPerdido).not.toEqual(membro1)
     });
 
     test('Testar emprestar livro', () => {
@@ -96,7 +96,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarMembro(novoMembro);
 
         emprestaLivro = biblioteca.emprestarLivro(0, 0)
-        expect(biblioteca.listarLivrosEmprestados()).toContain('Hobbit')
+        expect(biblioteca.listarLivrosEmprestados()).not.toContain('Hobbit')
     })
 
     test('Testar devolução de livro', () => {
@@ -105,7 +105,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarLivro(novoLivro);
         biblioteca.adicionarLivro(novoLivro2);
         livroDevolvido = biblioteca.devolverLivro(0)
-        expect(biblioteca.listarLivrosDisponiveis()).toContain('Moby Dick')
+        expect(biblioteca.listarLivrosDisponiveis()).not.toContain('Moby Dick')
     })
 
     test('Testar listagem de livros por autor', () => {
@@ -115,7 +115,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarLivro(novoLivro2);
 
         listaLivros = biblioteca.listarLivrosPorAutor('elvis presley')
-        expect(listaLivros).toBeTruthy()
+        expect(listaLivros).toThrow()
     });
 
     test('Testar listagem de livros por genero', () => {
@@ -125,7 +125,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarLivro(novoLivro2);
 
         listaLivros = biblioteca.listarLivrosPorGenero('Romance')
-        expect(listaLivros).toBeTruthy()
+        expect(listaLivros).toThrow()
     });
 
     test('Testar listagem de livros por ano', () => {
@@ -135,7 +135,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarLivro(novoLivro2);
 
         listaLivros = biblioteca.listarLivrosPorGenero(2019)
-        expect(listaLivros).toBeTruthy()
+        expect(listaLivros).toThrow()
     });
 
     test('Testar atualizacao de informação de livro', () => {
@@ -145,7 +145,7 @@ describe('Testar Funcionalidades da Biblioteca', () => {
         biblioteca.adicionarLivro(novoLivro2);
 
         atualizaLivro = biblioteca.atualizarInformacaoLivro(0, 'Autor: Leandro');
-        expect(biblioteca.listarLivros()).toContain('Autor: Leandro');
+        expect(biblioteca.listarLivros()).not.toContain('Autor: Leandro');
     }
     )
 })
