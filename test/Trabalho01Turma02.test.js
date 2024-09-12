@@ -10,9 +10,9 @@ describe('Testar Funcionalidades da Biblioteca', () => {
 
     test('Testar adição de livro e listagem de livros', () => {
         const novoLivro = 'Hobbit';
-        const novoLivro2 = 'Moby Dick';
+        const novoLivro1 = 'Moby Dick';
         biblioteca.adicionarLivro(novoLivro);
-        biblioteca.adicionarLivro(novoLivro2);
+        biblioteca.adicionarLivro(novoLivro1);
 
         listaLivros = biblioteca.listarLivros()
         expect(listaLivros).toEqual(['Hobbit','Moby Dick'])
